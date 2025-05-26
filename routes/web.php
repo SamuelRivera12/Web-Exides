@@ -6,6 +6,10 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Controllers\Auth\LoginController;
+
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
 // Rutas de autenticación con verificación de email activada
 Auth::routes(['verify' => true]);
 

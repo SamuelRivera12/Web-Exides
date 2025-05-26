@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class LoginController extends Controller
 {
@@ -22,15 +23,36 @@ class LoginController extends Controller
         return '/home';
     }
 
-    protected function authenticated(Request $request, $user)
+    public function logout(Request $request)
     {
-        if (!$user->hasVerifiedEmail()) {
-            Auth::logout();
-            return redirect('/login')->withErrors([
-                'email' => 'Debes verificar tu correo electrónico antes de iniciar sesión.'
-            ]);
+        $user = Auth::user();
+        
+        if ($user) {
+            $user->ultima_sesion = Carbon::now();
+            $user->estado = 'inactivo';
+            $user->save();
         }
+
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login'); // Puedes cambiar esto si quieres redirigir a otro lugar
     }
+
+    protected function authenticated(Request $request, $user)
+{
+    if (!$user->hasVerifiedEmail()) {
+        Auth::logout();
+        return redirect('/login')->withErrors([
+            'email' => 'Debes verificar tu correo electrónico antes de iniciar sesión.'
+        ]);
+    }
+
+    $user->estado = 'Activo';
+    $user->save();
+}
 
     public function __construct()
     {

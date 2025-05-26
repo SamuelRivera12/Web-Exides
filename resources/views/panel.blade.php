@@ -504,7 +504,7 @@ body.dark-theme .table-hover tbody tr:hover {
   color: #ffffff;
 }
 
-/* Controles de DataTables */
+/* Controlees de DataTables */
 body.dark-theme .dataTables_length,
 body.dark-theme .dataTables_filter,
 body.dark-theme .dataTables_info,
@@ -551,14 +551,14 @@ body.dark-theme .modal-footer {
 }
 
 /* Inputs y selects en modo oscuro */
-body.dark-theme .form-control,
+body.dark-theme .form-controle,
 body.dark-theme .form-select {
   background-color: #2d2d2d;
   border-color: #404040;
   color: #ffffff;
 }
 
-body.dark-theme .form-control:focus,
+body.dark-theme .form-controle:focus,
 body.dark-theme .form-select:focus {
   background-color: #363636;
   border-color: #4361ee;
@@ -609,21 +609,21 @@ body.dark-theme ::placeholder {
   color: #888888 !important;
 }
 
-/* Scrollbar en modo oscuro */
-body.dark-theme ::-webkit-scrollbar {
+/* Scrolelbar en modo oscuro */
+body.dark-theme ::-webkit-scrolelbar {
   width: 10px;
 }
 
-body.dark-theme ::-webkit-scrollbar-track {
+body.dark-theme ::-webkit-scrolelbar-track {
   background: #2d2d2d;
 }
 
-body.dark-theme ::-webkit-scrollbar-thumb {
+body.dark-theme ::-webkit-scrolelbar-thumb {
   background: #404040;
   border-radius: 5px;
 }
 
-body.dark-theme ::-webkit-scrollbar-thumb:hover {
+body.dark-theme ::-webkit-scrolelbar-thumb:hover {
   background: #4d4d4d;
 }
 
@@ -659,7 +659,7 @@ body.dark-theme ::-webkit-scrollbar-thumb:hover {
         <li>
           <a href="javascript:void(0)" class="sidebar-item" data-section="users">
             <i class="fas fa-users"></i>
-            <span class="sidebar-item-text">Usuarios</span>
+            <span class="sidebar-item-text">users</span>
           </a>
         </li>
         <li>
@@ -754,8 +754,8 @@ body.dark-theme ::-webkit-scrollbar-thumb:hover {
                   <div class="stat-icon">
                     <i class="fas fa-users"></i>
                   </div>
-                  <div class="stat-value usuarios"></div>
-                  <div class="stat-label">Nuevos usuarios</div>
+                  <div class="stat-value users"></div>
+                  <div class="stat-label">Nuevos users</div>
                 </div>
               </div>
             </div>
@@ -870,11 +870,11 @@ body.dark-theme ::-webkit-scrollbar-thumb:hover {
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="productName" class="form-label">Nombre del producto</label>
-              <input type="text" class="form-control" id="productName" required>
+              <input type="text" class="form-controle" id="productName" required>
             </div>
             <div class="col-md-6 mb-3">
               <label for="productSKU" class="form-label">TIPO</label>
-              <input type="text" class="form-control" id="productSKU" required>
+              <input type="text" class="form-controle" id="productSKU" required>
             </div>
           </div>
           <div class="row">
@@ -882,12 +882,12 @@ body.dark-theme ::-webkit-scrollbar-thumb:hover {
               <label for="productPrice" class="form-label">Precio</label>
               <div class="input-group">
                 <span class="input-group-text">$</span>
-                <input type="number" class="form-control" id="productPrice" required step="0.01">
+                <input type="number" class="form-controle" id="productPrice" required step="0.01">
               </div>
             </div>
             <div class="col-md-4 mb-3">
               <label for="productStock" class="form-label">Stock</label>
-              <input type="number" class="form-control" id="productStock" required>
+              <input type="number" class="form-controle" id="productStock" required>
             </div>
             <div class="col-md-4 mb-3">
               <label for="productCategory" class="form-label">Categoría</label>
@@ -905,13 +905,13 @@ body.dark-theme ::-webkit-scrollbar-thumb:hover {
           </div>
           <div class="mb-3">
             <label for="productDescription" class="form-label">Descripción</label>
-            <textarea class="form-control" id="productDescription" rows="4"></textarea>
+            <textarea class="form-controle" id="productDescription" rows="4"></textarea>
           </div>
           <div class="mb-3">
             <label class="form-label">Imagen actual</label>
             <img id="currentProductImage" src="" alt="Imagen del producto" style="max-width: 200px; display: none;" class="mb-2 d-block">
             <label for="productImage" class="form-label">Nueva imagen</label>
-            <input type="file" class="form-control" id="productImage" accept="image/*">
+            <input type="file" class="form-controle" id="productImage" accept="image/*">
           </div>
         </form>
       </div>
@@ -929,7 +929,7 @@ body.dark-theme ::-webkit-scrollbar-thumb:hover {
             <div class="card-body">
               <div class="table-top-bar">
                 <div class="search-bar">
-                  <input type="text" class="form-control" placeholder="Buscar productos...">
+                  <input type="text" class="form-controle" placeholder="Buscar productos...">
                 </div>
                 <button type="button" class="btn add-btn" data-bs-toggle="modal" data-bs-target="#productModal">
                   <i class="fas fa-plus"></i> Añadir Producto
@@ -1028,7 +1028,7 @@ body.dark-theme ::-webkit-scrollbar-thumb:hover {
             <div class="card-body">
               <div class="table-top-bar">
                 <div class="search-bar">
-                  <input type="text" class="form-control" placeholder="Buscar pedidos...">
+                  <input type="text" class="form-controle" placeholder="Buscar pedidos...">
                 </div>
                 <div class="d-flex">
                   <select class="form-select me-2">
@@ -1128,13 +1128,13 @@ body.dark-theme ::-webkit-scrollbar-thumb:hover {
         
         <!-- Users Section -->
         <div id="users-section" class="section-content">
-          <h2 class="section-title">Gestión de Usuarios</h2>
+          <h2 class="section-title">Gestión de users</h2>
           
           <div class="card">
             <div class="card-body">
               <div class="table-top-bar">
                 <div class="search-bar">
-                  <input type="text" class="form-control" placeholder="Buscar usuarios...">
+                  <input type="text" class="form-controle" placeholder="Buscar users...">
                 </div>
                 <button type="button" class="btn add-btn" data-bs-toggle="modal" data-bs-target="#userModal">
                   <i class="fas fa-plus"></i> Añadir Usuario
@@ -1148,7 +1148,7 @@ body.dark-theme ::-webkit-scrollbar-thumb:hover {
                       <th>ID</th>
                       <th>Nombre</th>
                       <th>Email</th>
-                      <th>Rol</th>
+                      <th>role</th>
                       <th>Estado</th>
                       <th>Última conexión</th>
                       <th>Acciones</th>
@@ -1285,19 +1285,19 @@ body.dark-theme ::-webkit-scrollbar-thumb:hover {
                   <h5 class="card-title mb-0">Alertas de Stock</h5>
                 </div>
                 <div class="card-body">
-                  <div class="alert alert-warning" role="alert">
+                  <div class="alert alert-warning" rolee="alert">
                     <i class="fas fa-exclamation-triangle me-2"></i>
                     <strong>Monitor Gaming 27" 4K</strong> - Stock bajo (3 unidades)
                   </div>
-                  <div class="alert alert-warning" role="alert">
+                  <div class="alert alert-warning" rolee="alert">
                     <i class="fas fa-exclamation-triangle me-2"></i>
                     <strong>Disco SSD 1TB</strong> - Stock bajo (5 unidades)
                   </div>
-                  <div class="alert alert-danger" role="alert">
+                  <div class="alert alert-danger" rolee="alert">
                     <i class="fas fa-times-circle me-2"></i>
                     <strong>Auriculares Bluetooth</strong> - Sin stock
                   </div>
-                  <div class="alert alert-danger" role="alert">
+                  <div class="alert alert-danger" rolee="alert">
                     <i class="fas fa-times-circle me-2"></i>
                     <strong>Tarjeta Gráfica RTX 4080</strong> - Sin stock
                   </div>
@@ -1446,15 +1446,15 @@ body.dark-theme ::-webkit-scrollbar-thumb:hover {
                   <form>
                     <div class="mb-3">
                       <label for="currentPassword" class="form-label">Contraseña actual</label>
-                      <input type="password" class="form-control" id="currentPassword">
+                      <input type="password" class="form-controle" id="currentPassword">
                     </div>
                     <div class="mb-3">
                       <label for="newPassword" class="form-label">Nueva contraseña</label>
-                      <input type="password" class="form-control" id="newPassword">
+                      <input type="password" class="form-controle" id="newPassword">
                     </div>
                     <div class="mb-3">
                       <label for="confirmPassword" class="form-label">Confirmar nueva contraseña</label>
-                      <input type="password" class="form-control" id="confirmPassword">
+                      <input type="password" class="form-controle" id="confirmPassword">
                     </div>
                     <button type="button" class="btn btn-primary">Cambiar contraseña</button>
                   </form>
@@ -1483,11 +1483,11 @@ body.dark-theme ::-webkit-scrollbar-thumb:hover {
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="productName" class="form-label">Nombre del producto</label>
-                <input type="text" class="form-control" id="productName">
+                <input type="text" class="form-controle" id="productName">
               </div>
               <div class="col-md-6 mb-3">
                 <label for="productSKU" class="form-label">TIPO</label>
-                <input type="text" class="form-control" id="productSKU">
+                <input type="text" class="form-controle" id="productSKU">
               </div>
             </div>
             <div class="row">
@@ -1495,12 +1495,12 @@ body.dark-theme ::-webkit-scrollbar-thumb:hover {
                 <label for="productPrice" class="form-label">Precio</label>
                 <div class="input-group">
                   <span class="input-group-text">$</span>
-                  <input type="number" class="form-control" id="productPrice">
+                  <input type="number" class="form-controle" id="productPrice">
                 </div>
               </div>
               <div class="col-md-4 mb-3">
                 <label for="productStock" class="form-label">Stock</label>
-                <input type="number" class="form-control" id="productStock">
+                <input type="number" class="form-controle" id="productStock">
               </div>
               <div class="col-md-4 mb-3">
                 <label for="productCategory" class="form-label">Categoría</label>
@@ -1518,11 +1518,11 @@ body.dark-theme ::-webkit-scrollbar-thumb:hover {
             </div>
             <div class="mb-3">
               <label for="productDescription" class="form-label">Descripción</label>
-              <textarea class="form-control" id="productDescription" rows="4"></textarea>
+              <textarea class="form-controle" id="productDescription" rows="4"></textarea>
             </div>
             <div class="mb-3">
               <label for="productImage" class="form-label">Imagen del producto</label>
-              <input type="file" class="form-control" id="productImage">
+              <input type="file" class="form-controle" id="productImage">
             </div>
           </form>
         </div>
@@ -1547,11 +1547,11 @@ body.dark-theme ::-webkit-scrollbar-thumb:hover {
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="orderId" class="form-label">ID Pedido</label>
-                <input type="text" class="form-control" id="orderId" value="#ORD-2025-1001" readonly>
+                <input type="text" class="form-controle" id="orderId" value="#ORD-2025-1001" readonly>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="orderDate" class="form-label">Fecha</label>
-                <input type="date" class="form-control" id="orderDate" value="2025-04-15">
+                <input type="date" class="form-controle" id="orderDate" value="2025-04-15">
               </div>
             </div>
             <div class="row">
@@ -1601,7 +1601,7 @@ body.dark-theme ::-webkit-scrollbar-thumb:hover {
                         </select>
                       </td>
                       <td>$599.99</td>
-                      <td><input type="number" class="form-control form-control-sm" value="1"></td>
+                      <td><input type="number" class="form-controle form-controle-sm" value="1"></td>
                       <td>$599.99</td>
                       <td><button type="button" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button></td>
                     </tr>
@@ -1621,31 +1621,31 @@ body.dark-theme ::-webkit-scrollbar-thumb:hover {
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="shippingAddress" class="form-label">Dirección de envío</label>
-                <textarea class="form-control" id="shippingAddress" rows="3">Calle Ejemplo 123, Ciudad, 28001</textarea>
+                <textarea class="form-controle" id="shippingAddress" rows="3">Calle Ejemplo 123, Ciudad, 28001</textarea>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="orderNotes" class="form-label">Notas</label>
-                <textarea class="form-control" id="orderNotes" rows="3"></textarea>
+                <textarea class="form-controle" id="orderNotes" rows="3"></textarea>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="shippingAddress" class="form-label">Dirección</label>
-                <input type="text" class="form-control" id="shippingAddress" required>
+                <input type="text" class="form-controle" id="shippingAddress" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="shippingCity" class="form-label">Ciudad</label>
-                <input type="text" class="form-control" id="shippingCity" required>
+                <input type="text" class="form-controle" id="shippingCity" required>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="shippingCountry" class="form-label">País</label>
-                <input type="text" class="form-control" id="shippingCountry" required>
+                <input type="text" class="form-controle" id="shippingCountry" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="shippingZip" class="form-label">Código Postal</label>
-                <input type="text" class="form-control" id="shippingZip" required>
+                <input type="text" class="form-controle" id="shippingZip" required>
               </div>
             </div>
             <div class="row">
@@ -1756,15 +1756,15 @@ body.dark-theme ::-webkit-scrollbar-thumb:hover {
             <input type="hidden" id="userId">  <!-- Añadir este campo oculto -->
             <div class="mb-3">
               <label for="userName" class="form-label">Nombre completo</label>
-              <input type="text" class="form-control" id="userName">
+              <input type="text" class="form-controle" id="userName">
             </div>
             <div class="mb-3">
               <label for="userEmail" class="form-label">Email</label>
-              <input type="email" class="form-control" id="userEmail">
+              <input type="email" class="form-controle" id="userEmail">
             </div>
             <div class="mb-3">
-              <label for="userRole" class="form-label">Rol</label>
-              <select class="form-select" id="userRole">
+              <label for="userrolee" class="form-label">role</label>
+              <select class="form-select" id="userrolee">
                 <option>Administrador</option>
                 <option>Inventario</option>
                 <option selected>Cliente</option>
@@ -1779,7 +1779,7 @@ body.dark-theme ::-webkit-scrollbar-thumb:hover {
             </div>
             <div class="mb-3">
               <label for="userPassword" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="userPassword">
+              <input type="password" class="form-controle" id="userPassword">
               <div class="form-text">Dejar en blanco para mantener la contraseña actual.</div>
             </div>
           </form>
@@ -1917,7 +1917,7 @@ body.dark-theme ::-webkit-scrollbar-thumb:hover {
 
 function deleteUser(userId) {
   const API_BASE_URL = 'http://localhost:3000';
-  fetch(`${API_BASE_URL}/usuarios/${userId}`, {
+  fetch(`${API_BASE_URL}/users/${userId}`, {
     method: 'DELETE'
   })
     .then(response => {
@@ -2084,23 +2084,23 @@ function updateSalesAmountCard() {
 
 function updateUsersCard() {
   const API_BASE_URL = 'http://localhost:3000';
-  fetch(`${API_BASE_URL}/usuarios/usuarios_ultimo_mes`)
+  fetch(`${API_BASE_URL}/users/users_ultimo_mes`)
     .then(response => {
-      if (!response.ok) throw new Error('Error al obtener usuarios');
+      if (!response.ok) throw new Error('Error al obtener users');
       return response.json();
     })
     .then(data => {
       // data es un array, tomamos el primer elemento
       if (data.length > 0) {
         const count = data[0].total_users;
-        $('.usuarios').first().text(`${count.toLocaleString()}`);
+        $('.users').first().text(`${count.toLocaleString()}`);
       } else {
-        $('.usuarios').first().text('0');
+        $('.users').first().text('0');
       }
     })
     .catch(error => {
-      console.error('Error al cargar usuarios:', error);
-      $('.usuarios').first().text('Error');
+      console.error('Error al cargar users:', error);
+      $('.users').first().text('Error');
     });
 }
 
@@ -2389,14 +2389,14 @@ function loadTablesFromAPI() {
     });
 }
     
-  // Aquí podrías agregar código similar para cargar datos de órdenes y usuarios
+  // Aquí podrías agregar código similar para cargar datos de órdenes y users
 
 function loadUsersFromAPI() {
   const API_BASE_URL = 'http://localhost:3000';
   
-  fetch(`${API_BASE_URL}/usuarios`)
+  fetch(`${API_BASE_URL}/users`)
     .then(response => {
-      if (!response.ok) throw new Error('Error al obtener datos de usuarios');
+      if (!response.ok) throw new Error('Error al obtener datos de users');
       return response.json();
     })
     .then(users => {
@@ -2405,9 +2405,9 @@ function loadUsersFromAPI() {
         data: users,
         columns: [
           { data: 'id' },
-          { data: 'nombre_completo' },
+          { data: 'name' },
           { data: 'email' },
-          { data: 'rol' },
+          { data: 'role' },
           { 
   data: 'estado',
   render: function(data, type, row) {
@@ -2451,8 +2451,8 @@ function loadUsersFromAPI() {
       });
     })
     .catch(error => {
-      console.error('Error al cargar usuarios:', error);
-      alert('Error al cargar los usuarios');
+      console.error('Error al cargar users:', error);
+      alert('Error al cargar los users');
     });
 }
 
@@ -2460,15 +2460,15 @@ function loadUsersFromAPI() {
 function editUser(userId) {
   const API_BASE_URL = 'http://localhost:3000';
   
-  fetch(`${API_BASE_URL}/usuarios/${userId}`)
+  fetch(`${API_BASE_URL}/users/${userId}`)
     .then(response => response.json())
     .then(user => {
       // Rellenar el modal con los datos del usuario
       $('#userModal').find('#userId').val(user.id);
       $('#userModal').find('#userStatus').val(user.estado);
       $('#userModal').find('#userEmail').val(user.email);
-      $('#userModal').find('#userRole').val(user.rol);
-      $('#userModal').find('#userName').val(user.nombre_completo);
+      $('#userModal').find('#userrolee').val(user.role);
+      $('#userModal').find('#userName').val(user.name);
     })
     .catch(error => {
       console.error('Error al cargar datos del usuario:', error);
@@ -2483,12 +2483,12 @@ function saveUser() {
   const userData = {
     estado: $('#userModal').find('#userStatus').val(),
     email: $('#userModal').find('#userEmail').val(),
-    rol: $('#userModal').find('#userRole').val(),
-    nombre_completo: $('#userModal').find('#userName').val(),
-    contrasena: $('#userModal').find('#userPassword').val()
+    role: $('#userModal').find('#userrolee').val(),
+    name: $('#userModal').find('#userName').val(),
+    password: $('#userModal').find('#userPassword').val()
   };
 
-  fetch(`${API_BASE_URL}/usuarios/${userId}`, {
+  fetch(`${API_BASE_URL}/users/${userId}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -2866,7 +2866,7 @@ function fillOrderModal(order, readonly = false) {
   $('#customerName').val(order.cliente_nombre);
   $('#orderStatus').val(order.estado);
 
-  // Controlar la edición
+  // Controlear la edición
   $('#orderDate').prop('disabled', readonly);
   $('#customerName').prop('disabled', readonly);
   $('#orderStatus').prop('disabled', readonly);
@@ -2879,16 +2879,16 @@ function fillOrderModal(order, readonly = false) {
     const row = `
       <tr>
         <td>
-          <input type="text" class="form-control form-control-sm" value="${prod.nombre}" readonly>
+          <input type="text" class="form-controle form-controle-sm" value="${prod.nombre}" readonly>
         </td>
         <td>
-          <input type="number" class="form-control form-control-sm" value="${prod.precio.toFixed(2)}" ${readonly ? 'readonly' : ''}>
+          <input type="number" class="form-controle form-controle-sm" value="${prod.precio.toFixed(2)}" ${readonly ? 'readonly' : ''}>
         </td>
         <td>
-          <input type="number" class="form-control form-control-sm" value="${prod.cantidad}" ${readonly ? 'readonly' : ''}>
+          <input type="number" class="form-controle form-controle-sm" value="${prod.cantidad}" ${readonly ? 'readonly' : ''}>
         </td>
         <td>
-          <input type="text" class="form-control form-control-sm" value="${prod.subtotal.toFixed(2)}" readonly>
+          <input type="text" class="form-controle form-controle-sm" value="${prod.subtotal.toFixed(2)}" readonly>
         </td>
         <td>
           ${readonly ? '' : '<button class="btn btn-sm btn-danger">🗑️</button>'}
@@ -2898,7 +2898,7 @@ function fillOrderModal(order, readonly = false) {
     tbody.append(row);
   });
 
-  // Si quieres controlar también la acción de guardar:
+  // Si quieres controlear también la acción de guardar:
   if (readonly) {
     $('.modal-footer .save-btn').hide();
   } else {
@@ -2925,15 +2925,15 @@ $(document).ready(function() {
 function editUser(userId) {
   const API_BASE_URL = 'http://localhost:3000';
   
-  fetch(`${API_BASE_URL}/usuarios/${userId}`)
+  fetch(`${API_BASE_URL}/users/${userId}`)
     .then(response => response.json())
     .then(user => {
       // Rellenar el modal con los datos del usuario
       $('#userModal').find('#userId').val(user.id);
       $('#userModal').find('#userStatus').val(user.estado);
       $('#userModal').find('#userEmail').val(user.email);
-      $('#userModal').find('#userRole').val(user.rol);
-      $('#userModal').find('#userName').val(user.nombre_completo);
+      $('#userModal').find('#userrolee').val(user.role);
+      $('#userModal').find('#userName').val(user.name);
     })
     .catch(error => {
       console.error('Error al cargar datos del usuario:', error);
@@ -2948,12 +2948,12 @@ function saveUser() {
   const userData = {
     estado: $('#userModal').find('#userStatus').val(),
     email: $('#userModal').find('#userEmail').val(),
-    rol: $('#userModal').find('#userRole').val(),
-    nombre_completo: $('#userModal').find('#userName').val(),
-    contrasena: $('#userModal').find('#userPassword').val()
+    role: $('#userModal').find('#userrolee').val(),
+    name: $('#userModal').find('#userName').val(),
+    password: $('#userModal').find('#userPassword').val()
   };
 
-  fetch(`${API_BASE_URL}/usuarios/${userId}`, {
+  fetch(`${API_BASE_URL}/users/${userId}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -3112,7 +3112,7 @@ $(document).ready(function() {
     loadTopProducts()
     
     // Mostrar notificación de actualización
-    const toast = `<div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+    const toast = `<div class="toast show" rolee="alert" aria-live="assertive" aria-atomic="true">
       <div class="toast-header">
         <strong class="me-auto">Sistema</strong>
         <small>Ahora</small>
