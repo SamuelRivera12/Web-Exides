@@ -1,5 +1,6 @@
 FROM php:8.2-apache
 
+# Instalar dependencias
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
@@ -22,23 +23,28 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
 RUN pecl install sqlsrv pdo_sqlsrv \
     && docker-php-ext-enable sqlsrv pdo_sqlsrv
 
+# Habilitar mod_rewrite
 RUN a2enmod rewrite
 
-# Configurar DocumentRoot a public/
-RUN echo "<VirtualHost *:80>
-    DocumentRoot /var/www/html/public
-    <Directory /var/www/html/public>
-        AllowOverride All
-        Require all granted
-    </Directory>
-</VirtualHost>" > /etc/apache2/sites-available/000-default.conf
-
+# Copiar archivos primero
 COPY . /var/www/html
-
 WORKDIR /var/www/html
 
+# Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Configurar permisos
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Alternativa simple: cambiar directamente el DocumentRoot de Apache
+RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
+RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/apache2.conf
+
+# Configurar el directorio público
+RUN echo "<Directory /var/www/html/public>\n\
+    AllowOverride All\n\
+    Require all granted\n\
+    DirectoryIndex index.php index.html\n\
+</Directory>" >> /etc/apache2/apache2.conf
 
 EXPOSE 80
