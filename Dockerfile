@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
     gnupg \
     && docker-php-ext-install pdo pdo_mysql zip
 
-# Agregar Microsoft repo, instalar ODBC driver y extensiones PHP para SQL Server
+# SQL Server drivers
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
     && curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list \
     && apt-get update \
@@ -23,6 +23,15 @@ RUN pecl install sqlsrv pdo_sqlsrv \
     && docker-php-ext-enable sqlsrv pdo_sqlsrv
 
 RUN a2enmod rewrite
+
+# Configurar DocumentRoot a public/
+RUN echo "<VirtualHost *:80>
+    DocumentRoot /var/www/html/public
+    <Directory /var/www/html/public>
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>" > /etc/apache2/sites-available/000-default.conf
 
 COPY . /var/www/html
 
