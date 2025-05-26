@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    color: blueviolet;
+    font-size: 50px;
+    text-decoration: underline;
+}
+
+#botones {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+#boton_facil {
+    background-color: green;
+    color: white;
+    padding: 10px 20px; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#boton_medio {
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#boton_dificil {
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#contenedor_sudoku {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#tablero {
+    display: grid;
+    grid-template-columns: repeat(9, 50px);
+    grid-template-rows: repeat(9, 50px);
+    gap: 1px;
+}
+
+.cell {
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+.cell:hover {
+    background-color: lightgray;
+}
+
+#celda00, #celda01, #celda02, #celda03, #celda04, #celda05, #celda06, #celda07, #celda08, #celda30, #celda31, #celda32, #celda33, #celda34, #celda35, #celda36, #celda37, #celda38, #celda60, #celda61, #celda62, #celda63, #celda64, #celda65, #celda66, #celda67, #celda68 {
+    border-top: 3px solid black;
+}
+
+#celda02, #celda12, #celda22, #celda32, #celda42, #celda52, #celda62, #celda72, #celda82, #celda08, #celda18, #celda28, #celda38, #celda48, #celda58, #celda68, #celda78, #celda88, #celda05, #celda15, #celda25, #celda35, #celda45, #celda55, #celda65, #celda75, #celda85 {
+    border-right: 3px solid black;
+}
+
+#celda80, #celda81, #celda82, #celda83, #celda84, #celda85, #celda86, #celda86, #celda87, #celda88{
+    border-bottom: 3px solid black;
+}
+
+#celda00, #celda10, #celda20, #celda30, #celda40, #celda50, #celda60, #celda70, #celda80{
+    border-left: 3px solid black;
+}

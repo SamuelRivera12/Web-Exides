@@ -1,0 +1,93 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff6a3; 
+    color: #333;
+}
+
+header, footer {
+    background-color: #606060; 
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+}
+
+.header-container, .footer-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #fff; 
+}
+
+input {
+    padding: 10px;
+    margin: 10px;
+}
+
+button {
+    padding: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #add8e6; 
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #495057; 
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 10px; 
+    height: 80px; 
+    width: auto; 
+}
+
+/* Estilos del carrito que deben estar disponibles en todas las páginas */
+.cart-panel {
+    position: fixed;
+    top: 0;
+    right: -420px;
+    width: 400px;
+    max-width: 95vw;
+    height: 100vh;
+    background: #232323;
+    box-shadow: -4px 0 24px rgba(0,0,0,0.25);
+    z-index: 3000;
+    transition: right 0.35s cubic-bezier(.77,0,.18,1);
+}
+
+.cart-panel.open {
+    right: 0;
+}
+
+#pagar-btn {
+    width: 100%;
+    padding: 15px;
+    background: #FFDA63;
+    color: #181818;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}

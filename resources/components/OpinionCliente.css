@@ -1,0 +1,47 @@
+.tarjeta {
+    background: #252525;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 300px;
+    transition: transform 0.3s ease; /* Add transition for smooth scaling */
+}
+
+.tarjeta:hover {
+    transform: scale(1.05); /* Scale up by 5% on hover */
+}
+
+.tarjeta img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.tarjeta h4 {
+    color: #FFDA63;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.tarjeta p {
+    color: #eee;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.estrellas {
+    display: flex;
+    justify-content: center;
+}
+
+.estrellas img {
+    width: 15px;
+    height: 15px;
+    margin: 0 2px;
+}

@@ -1,0 +1,31 @@
+.valor-card {
+    background: #1e1e1e;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.valor-card:hover {
+    transform: translateY(-5px);
+}
+
+.valor-card img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+}
+
+.valor-card h3 {
+    color: #FFDA63;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.valor-card p {
+    color: #eee;
+    line-height: 1.8;
+    text-align: center;
+    margin-bottom: 0;
+}

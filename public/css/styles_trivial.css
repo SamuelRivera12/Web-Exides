@@ -1,0 +1,168 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+  }
+  
+  #juego {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  #preguntas {
+    text-align: center;
+    margin-bottom: 20px;
+    align-items: center;
+  }
+  
+  #imagen {
+    max-width: 100%;
+    border-radius: 10px;
+    height: 300px;
+    align-items: center;
+    align-self: center;
+  }
+
+  #textojuego {
+    padding: 30px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  #respuestas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  #score {
+    padding-top: 25px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: #ddd;
+    cursor: pointer;
+  }
+  
+  #informacion {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-top: 25px;
+  }
+  
+  #boton_siguiente {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  #boton_cerrar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff4d4d;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  #fin_juego {
+    display: none;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    align-content: center;
+  }
+  
+  #imagen_fin {
+    display: none;
+  }
+
+  #boton_reiniciar{
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+  #boton_salir {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: #ff0000;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  #mejor_puntuacion {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  #foto10 {
+    animation: imagen 10s 60 ease-in-out;
+  }
+
+  #texto10 {
+    animation: texto 10s 60 ease-in-out;
+  }
+
+  @keyframes imagen {
+    0% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes texto {
+    0% {
+      color: rgb(214, 216, 73);
+    }
+    20% {
+      color: red;
+    }
+    40% {
+      color: rgb(35, 26, 136);
+    }
+    50% {
+      color: green;
+    }
+    70% {
+      color: violet;
+    }
+    100% {
+      color: rgb(214, 216, 73);
+    }
+  }

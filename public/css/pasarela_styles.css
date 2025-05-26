@@ -1,0 +1,605 @@
+/* Estilos generales */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #1a1a1a;
+    color: #fff;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+.contenedor {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+h1 {
+    color: #FFDA63;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Estilos del grid de compra */
+.checkout-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+/* Resumen de la compra */
+.resumen-compra {
+    background-color: #232323;
+    padding: 30px;
+    border-radius: 12px;
+}
+
+.resumen-compra h2 {
+    color: #FFDA63;
+    margin-bottom: 20px;
+}
+
+.lista-productos {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.producto-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #333;
+}
+
+.producto-imagen {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 15px;
+}
+
+.producto-info {
+    flex: 1;
+}
+
+.producto-nombre {
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.producto-precio {
+    color: #fff;
+    margin: 5px 0;
+}
+
+.total {
+    font-size: 1.2rem;
+    text-align: right;
+    margin-top: 20px;
+}
+
+/* Detalles de pago */
+.detalles-pago {
+    background-color: #232323;
+    padding: 30px;
+    border-radius: 12px;
+}
+
+.detalles-pago h2 {
+    color: #FFDA63;
+    margin-bottom: 20px;
+}
+
+/* Dirección */
+.direccion h3 {
+    color: #FFDA63;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #444;
+    background-color: #1a1a1a;
+    color: #fff;
+    border-radius: 6px;
+}
+
+/* Método de pago */
+.metodo-pago h3 {
+    color: #FFDA63;
+    margin-bottom: 15px;
+}
+
+.opciones-pago {
+    display: flex;
+    flex-direction: column;
+}
+
+.payment-option {
+    margin-bottom: 15px;
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.payment-option input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.payment-option label {
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+/* Custom Radio Button */
+.payment-option label:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #232323;
+    border: 2px solid #FFDA63;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+/* Checked State */
+.payment-option input:checked ~ label:before {
+    background-color: #FFDA63;
+}
+
+/* Hover State */
+.payment-option:hover input ~ label:before,
+.payment-option input:checked ~ label:before {
+    background-color: #FFDA63;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.payment-option label:after {
+    content: "";
+    position: absolute;
+    display: none;
+    top: 6.5px;
+    left: 6.5px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #181818;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.payment-option input:checked ~ label:after {
+    display: block;
+}
+
+/* Botón de pagar */
+.btn-pagar {
+    width: 100%;
+    padding: 15px;
+    background-color: #FFDA63;
+    color: #181818;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-pagar:hover {
+    background-color: #ffe48a;
+}
+
+/* Estilos del header y footer (puedes copiarlos de otros archivos CSS) */
+header {
+    width: 100%;
+    height: 400px;
+    background: rgba(0, 0, 0, 0.8);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    margin-right: 1000px;
+}
+
+.nav_logo a {
+    display: block;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.nav_logo a:hover {
+    transform: scale(1.05);
+}
+
+.nav_logo img {
+    max-width: 120px;
+}
+
+.nav_items {
+    display: flex;
+}
+
+/* Media query for responsive design */
+@media (max-width: 768px) {
+    .nav_items {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(18, 18, 18, 0.95);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        clip-path: circle(0% at 100% 0);
+        transition: clip-path 0.5s ease-in-out;
+        gap: 30px;
+        z-index: 999;
+    }
+
+    .nav_items.open {
+        clip-path: circle(150% at 100% 0);
+    }
+
+    .nav_items a {
+        margin: 10px 0;
+        font-size: 1.4rem;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        text-align: center;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .nav_items.open a {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .hamburguesa {
+        display: flex;
+    }
+}
+
+.nav_items a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.nav_items a:hover {
+    color: #FFDA63;
+}
+
+.hamburguesa {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    padding: 10px;
+}
+
+.hamburguesa span {
+    width: 30px;
+    height: 3px;
+    background-color: #fff;
+    margin: 4px 0;
+    transition: all 0.3s ease;
+    border-radius: 3px;
+}
+
+.textoheader {
+    display: flex;
+    height: 300px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    color: #fff;
+    margin-top: 60px;
+}
+
+.textoheader h1 {
+    font-size: 3.5rem;
+    color: #FFDA63;
+    text-align: center;
+}
+
+.textoheader h4 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-top: 15px;
+}
+
+/* Footer styles */
+.footer {
+    background: linear-gradient(to bottom, #121212, #1e1e1e);
+    color: #fff;
+    padding: 60px 0 0 0;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    padding: 0 20px;
+}
+
+.footer-section h3 {
+    color: #FFDA63;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section a:hover {
+    color: #FFDA63;
+}
+
+.contact-info li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #232323;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.social-links a:hover {
+    background: #FFDA63;
+    color: #181818;
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    margin-top: 60px;
+    background: #181818;
+    padding: 20px 0;
+}
+
+.footer-bottom-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-legal {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 15px;
+}
+
+.footer-legal a {
+    color: #888;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.footer-legal a:hover {
+    color: #FFDA63;
+}
+
+.footer-copyright {
+    color: #666;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Estilos responsive */
+@media (max-width: 768px) {
+    .checkout-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .resumen-compra,
+    .detalles-pago {
+        padding: 20px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .contact-info li {
+        justify-content: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .footer-legal {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+}
+
+/* Collapsible Section Styles */
+.collapsible-section {
+    margin-bottom: 20px;
+}
+
+.collapsible-button {
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 1.1rem;
+    transition: 0.4s;
+    border-radius: 8px;
+}
+
+.collapsible-button:hover {
+    background-color: #444;
+}
+
+.collapsible-content {
+    padding: 0 18px;
+    background-color: #232323;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    max-height: 0;
+}
+
+.collapsible-content form,
+.collapsible-content .opciones-pago {
+    padding: 20px 0;
+}
+
+.collapsible-button .arrow-icon {
+    float: right;
+    transition: transform 0.3s ease;
+}
+
+.collapsible-button.active .arrow-icon {
+    transform: rotate(180deg);
+}
+
+.payment-details {
+    margin-top: 10px;
+    padding: 15px;
+    background-color: #333;
+    border-radius: 8px;
+    display: none; /* Initially hide the details */
+}
+
+.payment-details p {
+    margin: 5px 0;
+    color: #fff;
+}
+
+#transferencia-details {
+    margin-bottom: 20px; /* Add margin to create space */
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #232323;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    border-radius: 8px;
+    text-align: center;
+    color: #fff;
+}
+
+.modal-content i {
+    color: #FFDA63;
+    margin-bottom: 15px;
+}
+
+.modal-content button {
+    background-color: #FFDA63;
+    color: #181818;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+    background-color: #ffe48a;
+}

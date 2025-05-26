@@ -1,0 +1,425 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #121212;
+    color: #fff;
+    line-height: 1.6;
+}
+
+header {
+    width: 100%;
+    height: 400px;
+    background: rgba(0, 0, 0, 0.8);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+}
+
+nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.nav_logo a {
+    display: block;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.nav_logo a:hover {
+    transform: scale(1.05);
+}
+
+.nav_logo img {
+    max-width: 120px;
+}
+
+.nav_items {
+    display: flex;
+}
+
+.nav_items a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.nav_items a:hover {
+    color: #FFDA63;
+}
+
+.hamburguesa {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    padding: 10px;
+}
+
+.hamburguesa span {
+    width: 30px;
+    height: 3px;
+    background-color: #fff;
+    margin: 4px 0;
+    transition: all 0.3s ease;
+    border-radius: 3px;
+}
+
+.hamburguesa.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.hamburguesa.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburguesa.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+.textoheader {
+    display: flex;
+    height: 300px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    color: #fff;
+    margin-top: 60px; /* Push the text down from nav */
+}
+
+.textoheader h1 {
+    font-size: 3.5rem;
+    color: #FFDA63;
+    text-align: center;
+}
+
+.contenedor {
+    padding: 30px 0; /* Reduced padding */
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.titulo {
+    color: #FFDA63;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.about-section,
+.valores-section,
+.estrategia-section {
+    margin: 0;
+    padding: 40px 0;
+}
+
+.about-content,
+.estrategia-content {
+    background: #1e1e1e;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.about-content:hover,
+.estrategia-content:hover {
+    transform: translateY(-5px);
+}
+
+.about-text p,
+.estrategia-text p,
+.valor-card p {
+    color: #eee;
+    margin-bottom: 20px;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+/* For better spacing between paragraphs */
+.about-text p:last-child,
+.estrategia-text p:last-child,
+.valor-card p:last-child {
+    margin-bottom: 0;
+}
+
+.about-section {
+    background-color: #121212; /* Darkest black */
+    padding: 40px 0;
+}
+
+.valores-section {
+    background-color: #1a1a1a; /* Medium black */
+    padding: 40px 0;
+}
+
+.valores-section .titulo,
+.valores-section .valor-card h3 {
+    color: #FFDA63; /* Keep yellow accent color */
+}
+
+.valores-section .valores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.valores-section .valor-card {
+    background: #1e1e1e;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.valores-section .valor-card:hover {
+    transform: translateY(-5px);
+}
+
+.valores-section .valor-card img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+}
+
+.valores-section .valor-card h3 {
+    color: #FFDA63;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.valores-section .valor-card p {
+    color: #eee;
+    line-height: 1.8;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.estrategia-section {
+    background-color: #252525; /* Lightest black */
+    padding: 40px 0;
+}
+
+/* Footer styles should be imported from index_styles.css */
+.footer {
+    background: linear-gradient(to bottom, #121212, #1e1e1e);
+    color: #fff;
+    padding: 60px 0 0 0;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    padding: 0 20px;
+}
+
+.footer-section h3 {
+    color: #FFDA63;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-section p {
+    color: #999;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 12px;
+}
+
+.footer-section ul li a {
+    color: #999;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: #FFDA63;
+}
+
+.contact-info li {
+    color: #999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    color: #999;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #FFDA63;
+}
+
+.footer-bottom {
+    margin-top: 40px;
+    padding: 20px 0;
+    border-top: 1px solid #333;
+}
+
+.footer-bottom-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-legal {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+}
+
+.footer-legal a {
+    color: #999;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-legal a:hover {
+    color: #FFDA63;
+}
+
+.footer-copyright {
+    color: #666;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .nav_items {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(18, 18, 18, 0.95);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        display: flex; /* Asegura que sea flex */
+        clip-path: circle(0% at 100% 0);
+        transition: clip-path 0.5s ease-in-out;
+        gap: 30px;
+        z-index: 999; /* Asegura que esté por encima */
+    }
+
+    .nav_items.open {
+        clip-path: circle(150% at 100% 0);
+    }
+
+    .nav_items a {
+        margin: 10px 0;
+        font-size: 1.4rem;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        text-align: center; /* Centra el texto */
+        width: 100vw;       /* Opcional: que ocupen todo el ancho */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .nav_items.open a {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .hamburguesa {
+        display: flex;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr; /* Change from 4 columns to 1 */
+        gap: 30px;
+        text-align: center;
+    }
+
+    .footer-section {
+        padding: 0 20px;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .contact-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .contact-info li {
+        justify-content: center;
+    }
+
+    .footer-legal {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .footer-legal a {
+        margin: 5px 0;
+        text-align: center;
+        width: 100%;
+    }
+}
