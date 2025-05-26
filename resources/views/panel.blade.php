@@ -1765,7 +1765,7 @@ body.dark-theme ::-webkit-scrolelbar-thumb:hover {
             <div class="mb-3">
               <label for="userrolee" class="form-label">role</label>
               <select class="form-select" id="userrolee">
-                <option>Administrador</option>
+                <option>admin</option>
                 <option>Inventario</option>
                 <option selected>Cliente</option>
               </select>
