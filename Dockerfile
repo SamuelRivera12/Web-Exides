@@ -41,7 +41,12 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
 RUN composer install --no-dev --optimize-autoloader
 
 # Instalar dependencias de Node.js (incluyendo SASS)
-RUN npm install
+# Limpiar package-lock.json y cache para evitar conflictos de plataforma
+RUN rm -f package-lock.json
+RUN npm cache clean --force
+
+# Instalar dependencias limpias con npm ci o install
+RUN npm install --platform=linux --arch=x64
 # Asegurar que sass esté instalado
 RUN npm install -D sass
 
