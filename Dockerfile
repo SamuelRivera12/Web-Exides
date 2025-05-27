@@ -1,4 +1,4 @@
-# Etapa 1: Build frontend (versión simple)
+# Etapa 1: Build frontend (solución para lightningcss)
 FROM node:18-alpine AS frontend
 
 WORKDIR /app
@@ -6,13 +6,18 @@ WORKDIR /app
 # Instalar dependencias básicas
 RUN apk add --no-cache python3 make g++
 
-# Copiar y instalar dependencias de Node
+# Copiar solo package.json (SIN package-lock.json)
 COPY package.json ./
-RUN npm install --omit=dev
+
+# Regenerar package-lock.json limpio para Linux
+RUN npm install --package-lock-only
+
+# Instalar dependencias (esto creará las versiones correctas para Linux)
+RUN npm install
 
 # Copiar código y compilar
 COPY . .
-RUN npm run build 2>/dev/null || npm run production || echo "Build completed with warnings"
+RUN npm run build
 
 # Etapa 2: Aplicación PHP
 FROM php:8.2-apache
@@ -90,20 +95,16 @@ RUN echo '<Directory /var/www/html/public>\n\
 </Directory>' > /etc/apache2/conf-available/laravel.conf \
     && a2enconf laravel
 
-# Crear script de inicio
+# Crear script de inicio simple con PHP server
 RUN echo '#!/bin/bash\n\
 set -e\n\
 \n\
 # Configurar puerto dinámico para Render\n\
-export PORT=${PORT:-80}\n\
+export PORT=${PORT:-8000}\n\
 echo "Using port: $PORT"\n\
 \n\
-# Configurar Apache para usar el puerto dinámico\n\
-sed -i "s/Listen 80/Listen $PORT/g" /etc/apache2/ports.conf\n\
-sed -i "s/:80>/:$PORT>/g" /etc/apache2/sites-available/000-default.conf\n\
-\n\
 # Esperar a que la base de datos esté disponible (opcional)\n\
-if [ "$DB_CONNECTION" != "" ]; then\n\
+if [ "$DB_CONNECTION" != "" ] && [ "$DB_CONNECTION" != "sqlite" ]; then\n\
     echo "Waiting for database..."\n\
     timeout=30\n\
     while [ $timeout -gt 0 ]; do\n\
@@ -121,9 +122,9 @@ if [ "$DB_CONNECTION" != "" ]; then\n\
     php artisan migrate --force || echo "Migration failed, continuing..."\n\
 fi\n\
 \n\
-# Iniciar Apache\n\
-echo "Starting Apache on port $PORT..."\n\
-exec apache2-foreground' > /start.sh \
+# Iniciar servidor PHP\n\
+echo "Starting PHP server on port $PORT..."\n\
+exec php artisan serve --host=0.0.0.0 --port=$PORT' > /start.sh \
     && chmod +x /start.sh
 
 EXPOSE $PORT
