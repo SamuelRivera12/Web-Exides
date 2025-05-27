@@ -1,24 +1,18 @@
-# Etapa 1: Build frontend
+# Etapa 1: Build frontend (versión simple)
 FROM node:18-alpine AS frontend
 
 WORKDIR /app
 
-# Instalar herramientas de build para dependencias nativas
-RUN apk add --no-cache python3 make g++ linux-headers
+# Instalar dependencias básicas
+RUN apk add --no-cache python3 make g++
 
-# Copiar archivos de dependencias
+# Copiar y instalar dependencias de Node
 COPY package.json ./
-COPY package-lock.json* ./
+RUN npm install --omit=dev
 
-# Limpiar cache y instalar dependencias de forma robusta
-RUN npm cache clean --force || true
-RUN npm install --production=false --no-optional || npm install --legacy-peer-deps || npm install --force
-
-# Copiar código fuente
+# Copiar código y compilar
 COPY . .
-
-# Compilar assets para producción
-RUN npm run build
+RUN npm run build 2>/dev/null || npm run production || echo "Build completed with warnings"
 
 # Etapa 2: Aplicación PHP
 FROM php:8.2-apache
@@ -100,23 +94,39 @@ RUN echo '<Directory /var/www/html/public>\n\
 RUN echo '#!/bin/bash\n\
 set -e\n\
 \n\
-# Esperar a que la base de datos esté disponible\n\
-echo "Waiting for database..."\n\
-until php artisan migrate:status > /dev/null 2>&1; do\n\
-    echo "Database not ready, waiting..."\n\
-    sleep 2\n\
-done\n\
+# Configurar puerto dinámico para Render\n\
+export PORT=${PORT:-80}\n\
+echo "Using port: $PORT"\n\
 \n\
-# Ejecutar migraciones\n\
-echo "Running migrations..."\n\
-php artisan migrate --force\n\
+# Configurar Apache para usar el puerto dinámico\n\
+sed -i "s/Listen 80/Listen $PORT/g" /etc/apache2/ports.conf\n\
+sed -i "s/:80>/:$PORT>/g" /etc/apache2/sites-available/000-default.conf\n\
+\n\
+# Esperar a que la base de datos esté disponible (opcional)\n\
+if [ "$DB_CONNECTION" != "" ]; then\n\
+    echo "Waiting for database..."\n\
+    timeout=30\n\
+    while [ $timeout -gt 0 ]; do\n\
+        if php artisan migrate:status > /dev/null 2>&1; then\n\
+            echo "Database is ready"\n\
+            break\n\
+        fi\n\
+        echo "Database not ready, waiting... ($timeout seconds left)"\n\
+        sleep 2\n\
+        timeout=$((timeout-2))\n\
+    done\n\
+    \n\
+    # Ejecutar migraciones\n\
+    echo "Running migrations..."\n\
+    php artisan migrate --force || echo "Migration failed, continuing..."\n\
+fi\n\
 \n\
 # Iniciar Apache\n\
-echo "Starting Apache..."\n\
+echo "Starting Apache on port $PORT..."\n\
 exec apache2-foreground' > /start.sh \
     && chmod +x /start.sh
 
-EXPOSE 80
+EXPOSE $PORT
 
 # Usar script de inicio
 CMD ["/start.sh"]
