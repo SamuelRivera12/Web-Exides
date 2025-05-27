@@ -6,11 +6,13 @@ WORKDIR /app
 # Instalar herramientas de build para dependencias nativas
 RUN apk add --no-cache python3 make g++ linux-headers
 
-# Copiar solo package.json para aprovechar cache de Docker
+# Copiar archivos de dependencias
 COPY package.json ./
+COPY package-lock.json* ./
 
-# Generar package-lock.json limpio en Linux y instalar dependencias
-RUN npm install --platform=linux --arch=x64
+# Limpiar cache y instalar dependencias de forma robusta
+RUN npm cache clean --force || true
+RUN npm install --production=false --no-optional || npm install --legacy-peer-deps || npm install --force
 
 # Copiar código fuente
 COPY . .
