@@ -320,8 +320,56 @@
         const acceptBtn = document.getElementById("modal-accept-btn");
 
         // When the user clicks on the button, open the modal
-        finalizarCompraBtn.onclick = function() {
-            modal.style.display = "block";
+        finalizarCompraBtn.onclick = async function() {
+            const direccionForm = document.getElementById('direccion-form');
+            const metodoPago = document.querySelector('input[name="metodo_pago"]:checked').value;
+            
+            const pedidoData = {
+                id_usuario: {{ Auth::id() }},
+                fecha_pedido: new Date().toISOString(),
+                estado: "pendiente",
+                direccion: direccionForm.direccion.value,
+                ciudad: direccionForm.ciudad.value,
+                pais: direccionForm.pais.value,
+                codigo_postal: direccionForm.codigo_postal.value,
+                metodo_pago: metodoPago,
+                cantidad_total: {{ $total }},
+                lineas: @json($cart).map(item => ({
+                    id_producto: item.id_producto,
+                    cantidad: item.cantidad,
+                    precio: item.precio
+                }))
+            };
+
+            try {
+                modal.style.display = "block";
+                document.querySelector('.modal-content p').textContent = 'Procesando pedido...';
+
+                const response = await fetch('https://api-web-hlw7.onrender.com/pedidos', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(pedidoData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    document.querySelector('.modal-content p').textContent = '¡Pedido realizado con éxito!';
+                    localStorage.removeItem('cart');
+                    // Redirect after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = '/tienda';
+                    }, 2000);
+                } else {
+                    throw new Error(data.detail || 'Error al procesar el pedido');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.querySelector('.modal-content p').textContent = 
+                    `Error al procesar el pedido: ${error.message}`;
+            }
         }
 
         // When the user clicks on <span> (x), close the modal

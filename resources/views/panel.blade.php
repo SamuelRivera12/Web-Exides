@@ -743,7 +743,7 @@ body.dark-theme ::-webkit-scrolelbar-thumb:hover {
                     <i class="fas fa-shopping-bag"></i>
                   </div>
                   <div class="stat-value pedidos"></div>
-                  <div class="stat-label">Nuevos pedidos</div>
+                  <div class="stat-label">Nuevas ventas</div>
                 </div>
               </div>
             </div>
@@ -755,7 +755,7 @@ body.dark-theme ::-webkit-scrolelbar-thumb:hover {
                     <i class="fas fa-users"></i>
                   </div>
                   <div class="stat-value users"></div>
-                  <div class="stat-label">Nuevos users</div>
+                  <div class="stat-label">Nuevos usuarios</div>
                 </div>
               </div>
             </div>
@@ -893,13 +893,10 @@ body.dark-theme ::-webkit-scrolelbar-thumb:hover {
               <label for="productCategory" class="form-label">Categoría</label>
               <select class="form-select" id="productCategory" required>
                 <option value="">Seleccionar categoría</option>
-                <option>Smartphones</option>
-                <option>Laptops</option>
-                <option>Monitores</option>
-                <option>Periféricos</option>
-                <option>Componentes PC</option>
-                <option>Audio</option>
-                <option>Impresoras</option>
+                <option>Ratones</option>
+                <option>Teclados</option>
+                <option>Altavoces</option>
+                <option>Cascos</option>
               </select>
             </div>
           </div>
@@ -1916,7 +1913,7 @@ body.dark-theme ::-webkit-scrolelbar-thumb:hover {
     });
 
 function deleteUser(userId) {
-  const API_BASE_URL = 'http://localhost:3000';
+  const API_BASE_URL = 'https://api-web-hlw7.onrender.com';
   fetch(`${API_BASE_URL}/users/${userId}`, {
     method: 'DELETE'
   })
@@ -1939,7 +1936,7 @@ function deleteUser(userId) {
     // Función para cargar datos de la API y actualizar los gráficos
 function loadChartDataFromAPI() {
   // URLs de la API (ajusta las URLs según el dominio y puerto donde se ejecute tu API)
-  const API_BASE_URL = 'http://localhost:3000';
+  const API_BASE_URL = 'https://api-web-hlw7.onrender.com';
   const MONTHLY_SALES_URL = `${API_BASE_URL}/ventas/mensual`;
   const MONTHLY_SALES_LAST_MONTH_URL = `${API_BASE_URL}/sales/monthly`;
   const CATEGORY_SALES_URL = `${API_BASE_URL}/ventas/categorias`;
@@ -2039,7 +2036,7 @@ function loadChartDataFromAPI() {
     });
 
     function updateMonthlySalesCard() {
-  const API_BASE_URL = 'http://localhost:3000';
+  const API_BASE_URL = 'https://api-web-hlw7.onrender.com';
   fetch(`${API_BASE_URL}/ventas/mensuales_ultimo_mes`)
     .then(response => {
       if (!response.ok) throw new Error('Error al obtener ventas del mes');
@@ -2061,7 +2058,7 @@ function loadChartDataFromAPI() {
 }
 
 function updateSalesAmountCard() {
-  const API_BASE_URL = 'http://localhost:3000';
+  const API_BASE_URL = 'https://api-web-hlw7.onrender.com';
     fetch(`${API_BASE_URL}/ventas/total_ultimo_mes`)
       .then(response => {
       if (!response.ok) throw new Error('Error al obtener ventas del mes');
@@ -2083,7 +2080,7 @@ function updateSalesAmountCard() {
 }
 
 function updateUsersCard() {
-  const API_BASE_URL = 'http://localhost:3000';
+  const API_BASE_URL = 'https://api-web-hlw7.onrender.com';
   fetch(`${API_BASE_URL}/users/users_ultimo_mes`)
     .then(response => {
       if (!response.ok) throw new Error('Error al obtener users');
@@ -2105,7 +2102,7 @@ function updateUsersCard() {
 }
 
 function updateStock() {
-  const API_BASE_URL = 'http://localhost:3000';
+  const API_BASE_URL = 'https://api-web-hlw7.onrender.com';
   fetch(`${API_BASE_URL}/productos/poco_stock`)
     .then(response => {
       if (!response.ok) throw new Error('Error al obtener productos con stock bajo');
@@ -2347,7 +2344,7 @@ $(document).ready(function() {
 
 // Función para actualizar las tablas de datos
 function loadTablesFromAPI() {
-  const API_BASE_URL = 'http://localhost:3000';
+  const API_BASE_URL = 'https://api-web-hlw7.onrender.com';
   
   fetch(`${API_BASE_URL}/productos`)
     .then(response => {
@@ -2392,7 +2389,7 @@ function loadTablesFromAPI() {
   // Aquí podrías agregar código similar para cargar datos de órdenes y users
 
 function loadUsersFromAPI() {
-  const API_BASE_URL = 'http://localhost:3000';
+  const API_BASE_URL = 'https://api-web-hlw7.onrender.com';
   
   fetch(`${API_BASE_URL}/users`)
     .then(response => {
@@ -2458,7 +2455,7 @@ function loadUsersFromAPI() {
 
 // Función para cargar datos del usuario en el modal
 function editUser(userId) {
-  const API_BASE_URL = 'http://localhost:3000';
+  const API_BASE_URL = 'https://api-web-hlw7.onrender.com';
   
   fetch(`${API_BASE_URL}/users/${userId}`)
     .then(response => response.json())
@@ -2478,7 +2475,7 @@ function editUser(userId) {
 
 // Función para guardar cambios del usuario
 function saveUser() {
-  const API_BASE_URL = 'http://localhost:3000';
+  const API_BASE_URL = 'https://api-web-hlw7.onrender.com';
   const userId = $('#userModal').find('#userId').val();
   const userData = {
     estado: $('#userModal').find('#userStatus').val(),
@@ -2508,7 +2505,7 @@ function saveUser() {
 }
 
 function loadTopProducts() {
-    const API_BASE_URL = 'http://localhost:3000';
+    const API_BASE_URL = 'https://api-web-hlw7.onrender.com';
     
     console.log('Cargando productos más vendidos...');
     
@@ -2575,7 +2572,7 @@ $(document).ready(function() {
 });
 
 function loadRecentOrders() {
-  const API_BASE_URL = 'http://localhost:3000';
+  const API_BASE_URL = 'https://api-web-hlw7.onrender.com';
   
   fetch(`${API_BASE_URL}/pedidos/recientes`)
     .then(response => {
@@ -2651,7 +2648,7 @@ function loadRecentOrders() {
 }
 
 function loadOrdersFromAPI() {
-  const API_BASE_URL = 'http://localhost:3000';
+  const API_BASE_URL = 'https://api-web-hlw7.onrender.com';
   
   console.log('Iniciando carga de pedidos...');
   console.log('URL:', `${API_BASE_URL}/pedidos`);
@@ -2790,7 +2787,7 @@ function loadOrdersFromAPI() {
 }
 
 function viewOrderDetails(orderId) {
-  fetch(`http://localhost:3000/pedidos/${orderId}`)
+  fetch(`https://api-web-hlw7.onrender.com/pedidos/${orderId}`)
     .then(response => {
       if (!response.ok) {
         throw new Error(`Error al obtener el pedido: ${response.statusText}`);
@@ -2821,7 +2818,7 @@ function getStatusBadgeClass(status) {
 
 // Funciones placeholder
 function viewOrderDetails(orderId) {
-  fetch(`http://localhost:3000/pedidos/${orderId}`)
+  fetch(`https://api-web-hlw7.onrender.com/pedidos/${orderId}`)
     .then(response => {
       if (!response.ok) {
         throw new Error(`Error al obtener el pedido: ${response.statusText}`);
@@ -2842,7 +2839,7 @@ function viewOrderDetails(orderId) {
 
 
 function editOrder(orderId) {
-  fetch(`http://localhost:3000/pedidos/${orderId}`)
+  fetch(`https://api-web-hlw7.onrender.com/pedidos/${orderId}`)
     .then(response => {
       if (!response.ok) {
         throw new Error(`Error al obtener el pedido: ${response.statusText}`);
@@ -2923,7 +2920,7 @@ $(document).ready(function() {
 
 // Función para cargar datos del usuario en el modal
 function editUser(userId) {
-  const API_BASE_URL = 'http://localhost:3000';
+  const API_BASE_URL = 'https://api-web-hlw7.onrender.com';
   
   fetch(`${API_BASE_URL}/users/${userId}`)
     .then(response => response.json())
@@ -2943,7 +2940,7 @@ function editUser(userId) {
 
 // Función para guardar cambios del usuario
 function saveUser() {
-  const API_BASE_URL = 'http://localhost:3000';
+  const API_BASE_URL = 'https://api-web-hlw7.onrender.com';
   const userId = $('#userModal').find('#userId').val();
   const userData = {
     estado: $('#userModal').find('#userStatus').val(),
@@ -2975,7 +2972,7 @@ function saveUser() {
 
 
 function editProduct(productId) {
-  const API_BASE_URL = 'http://localhost:3000';
+  const API_BASE_URL = 'https://api-web-hlw7.onrender.com';
   
   fetch(`${API_BASE_URL}/productos/${productId}`)
     .then(response => {
@@ -3011,20 +3008,64 @@ function editProduct(productId) {
     });
 }
 
+function deleteProduct(productId) {
+    const API_BASE_URL = 'https://api-web-hlw7.onrender.com';
+    
+    if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
+        fetch(`${API_BASE_URL}/productos/${productId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(err => {
+                    throw new Error(err.detail || 'Error al eliminar producto');
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            loadTablesFromAPI(); // Recargar tabla de productos
+            alert('Producto eliminado correctamente');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert(`Error al eliminar producto: ${error.message}`);
+        });
+    }
+}
+
 function saveProduct() {
-    const API_BASE_URL = 'http://localhost:3000';
+    const API_BASE_URL = 'https://api-web-hlw7.onrender.com';
     const productId = $('#productId').val();
     
-    // Crear objeto con los datos del producto
-    const productData = {
-        nombre: $('#productName').val(),
-        descripcion: $('#productDescription').val(),
+    // Obtener todos los valores del formulario
+    const formData = {
+        nombre: $('#productName').val().trim(),
+        descripcion: $('#productDescription').val().trim(),
         categoria: $('#productCategory').val(),
-        tipo: $('#productSKU').val(),
-        precio: parseFloat($('#productPrice').val()),
-        unidades: parseInt($('#productStock').val()),
-        foto: null // Por ahora dejamos la foto como null
+        tipo: $('#productSKU').val().trim(),
+        precio: parseFloat($('#productPrice').val()) || 0,
+        unidades: parseInt($('#productStock').val()) || 0
     };
+
+    // Verificar que los campos requeridos no estén vacíos
+    if (!formData.nombre || !formData.categoria || !formData.precio) {
+        alert('Por favor, complete todos los campos requeridos');
+        return;
+    }
+
+    // Si hay una imagen actual, mantenerla
+    if ($('#currentProductImage').is(':visible')) {
+        formData.foto = $('#currentProductImage').attr('src');
+    }
+
+    // Filtrar cualquier valor null o undefined
+    const productData = Object.fromEntries(
+        Object.entries(formData).filter(([_, value]) => value != null && value !== '')
+    );
 
     console.log('Datos a enviar:', productData); // Para debug
 
@@ -3048,7 +3089,7 @@ function saveProduct() {
     })
     .then(data => {
         $('#productModal').modal('hide');
-        loadProductsTable(); // Función para recargar la tabla de productos
+        loadTablesFromAPI(); // Recargar tabla de productos
         alert(productId ? 'Producto actualizado correctamente' : 'Producto creado correctamente');
     })
     .catch(error => {
@@ -3071,6 +3112,16 @@ $(document).ready(function() {
   $('#productModal .btn-primary').on('click', function() {
     saveProduct();
   });
+
+  $(document).ready(function() {
+    // ... otros event listeners ...
+
+    // Añadir evento para el botón de eliminar
+    $('#products-table').on('click', '.delete-btn', function() {
+        const productId = $(this).data('id');
+        deleteProduct(productId);
+    });
+});
   
   // Evento para limpiar el modal cuando se cierra
   $('#productModal').on('hidden.bs.modal', function() {

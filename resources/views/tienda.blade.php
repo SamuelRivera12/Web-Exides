@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
-
+<?php
+use Illuminate\Support\Facades\Auth;
+?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +24,15 @@
             <div class="nav_items" id="navItems">
                 <a href="/">Inicio</a>
                 <a href="sobrenosotros">Sobre Nosotros</a>
-                <a href="login">Iniciar Sesión</a>
+                @guest
+                    <a href="login">Iniciar Sesión</a>
+                @else
+                    <a href="perfil">Mi Perfil</a>
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                @endguest
             </div>
             <div class="hamburguesa" id="hamburguesa">
                 <span></span>
@@ -30,13 +40,15 @@
                 <span></span>
             </div>
             
-            <!-- Icono del carrito movido aquí -->
+            <!-- Icono del carrito solo para usuarios autenticados -->
+            @auth
             <div class="cart-container">
                 <button id="cart-btn" style="background:none;border:none;cursor:pointer;position:relative;">
                     <i class="fas fa-shopping-cart" style="font-size:1.7rem;color:#FFDA63;"></i>
                     <span id="cart-count" style="position:absolute;top:-8px;right:-10px;background:#FFDA63;color:#181818;font-weight:bold;border-radius:50%;padding:2px 7px;font-size:0.9rem;">0</span>
                 </button>
             </div>
+            @endauth
         </nav>
         <section class="textoheader">
             <h1>Tienda</h1>
@@ -62,31 +74,12 @@
         </form>
 
         <div class="galeria" id="galeria-productos">
-            <?php
-                $json = file_get_contents(public_path('assets/products.json'));
-                $products = json_decode($json, true);
-                foreach ($products as $product):
-            ?>
-            <a href="{{ url('/producto/' . $product['id']) }}" class="product-card"
-                data-titulo="{{ strtolower($product['nombre'] ?? '') }}"
-                data-precio="{{ $product['precio'] ?? 0 }}"
-                data-categoria="{{ $product['categoria'] ?? '' }}">
-                <img class="product-image" src="{{ asset($product['foto']) }}" alt="{{ $product['nombre'] }}">
-                <h3 class="product-title">{{ $product['nombre'] ?? '' }}</h3>
-                <div class="product-bottom">
-                    <strong class="product-price">
-                        {{ isset($product['precio']) ? number_format($product['precio'], 2) . ' €' : '' }}
-                    </strong>
-                    <button class="product-button" onclick="event.preventDefault(); addToCart('{{ $product['nombre'] }}', {{ $product['precio'] }}, '{{ $product['foto'] }}')">
-                        Agregar al carrito
-                    </button>
-                </div>
-            </a>
-            <?php endforeach; ?>
+
         </div>
     </div>
 
-    <!-- Panel lateral del carrito -->
+    <!-- Panel lateral del carrito - Solo para usuarios autenticados -->
+    @auth
     <div id="cart-panel" class="cart-panel">
         <div class="cart-panel-content">
             <button id="close-cart" class="close-cart-btn">&times;</button>
@@ -97,6 +90,22 @@
             <button id="pagar-btn">Pagar</button>
         </div>
     </div>
+    @endauth
+
+    <!-- Modal de alerta para usuarios no autenticados -->
+    @guest
+    <div id="login-alert-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Iniciar Sesión Requerido</h2>
+            <p>Para agregar productos al carrito y realizar compras, necesitas iniciar sesión.</p>
+            <div class="modal-buttons">
+                <a href="{{ route('login') }}" class="btn btn-primary">Iniciar Sesión</a>
+                <a href="{{ route('register') }}" class="btn btn-secondary">Registrarse</a>
+            </div>
+        </div>
+    </div>
+    @endguest
 
     <footer class="footer">
         <div class="footer-content">
@@ -149,6 +158,9 @@
     </footer>
 
     <script>
+        // Variable global para verificar si el usuario está autenticado
+        const isAuthenticated = @auth true @else false @endauth;
+
         document.getElementById('hamburguesa').addEventListener('click', function() {
             this.classList.toggle('open');
             document.getElementById('navItems').classList.toggle('open');
@@ -175,6 +187,20 @@
             });
         });
 
+        // Función para mostrar alerta de login
+        function showLoginAlert() {
+            const modal = document.getElementById('login-alert-modal');
+            if (modal) {
+                modal.style.display = 'block';
+            }
+        }
+
+        // Función para redirigir al login
+        function redirectToLogin() {
+            window.location.href = "{{ route('login') }}";
+        }
+
+        // Event listeners para el modal de login
         document.addEventListener('DOMContentLoaded', function() {
             // Get category from URL parameters
             const urlParams = new URLSearchParams(window.location.search);
@@ -190,11 +216,117 @@
                 document.getElementById('filtros-form').dispatchEvent(filterEvent);
             }
 
-            // Attach add to cart listeners
-            attachAddToCartListeners();
+            // Modal de login para usuarios no autenticados
+            const loginModal = document.getElementById('login-alert-modal');
+            if (loginModal) {
+                const closeBtn = loginModal.querySelector('.close');
+                if (closeBtn) {
+                    closeBtn.onclick = function() {
+                        loginModal.style.display = 'none';
+                    }
+                }
+
+                window.onclick = function(event) {
+                    if (event.target == loginModal) {
+                        loginModal.style.display = 'none';
+                    }
+                }
+            }
+        });
+
+       const galeria = document.getElementById('galeria-productos');
+
+    async function cargarProductos() {
+        try {
+            const response = await fetch('https://api-web-hlw7.onrender.com/productos');
+            const productos = await response.json();
+
+            galeria.innerHTML = '';
+
+            productos.forEach(producto => {
+                const tarjeta = document.createElement('a');
+                // Cambiamos la URL para incluir todos los parámetros necesarios
+                tarjeta.href = `/producto/${producto.id_producto}`;
+                tarjeta.className = 'product-card';
+                // Añadimos los datos como atributos data-*
+                tarjeta.setAttribute('data-titulo', producto.nombre.toLowerCase());
+                tarjeta.setAttribute('data-precio', producto.precio);
+                tarjeta.setAttribute('data-categoria', producto.categoria);
+                
+                // Añadimos el evento click
+                tarjeta.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // Crear objeto con la información del producto
+                    const productoInfo = {
+                        id: producto.id_producto,
+                        nombre: producto.nombre,
+                        precio: producto.precio,
+                        descripcion: producto.descripcion,
+                        categoria: producto.categoria,
+                        foto: producto.foto,
+                        marca: producto.marca,
+                        tipo: producto.tipo,
+                        unidades: producto.unidades
+                    };
+                    
+                    // Guardar en sessionStorage
+                    sessionStorage.setItem('productoSeleccionado', JSON.stringify(productoInfo));
+                    
+                    // Redirigir a la página del producto
+                    window.location.href = `/producto/${producto.id_producto}`;
+                });
+
+                tarjeta.innerHTML = `
+                    <img class="product-image" src="${producto.foto || ''}" alt="${producto.nombre}">
+                    <h3 class="product-title">${producto.nombre}</h3>
+                    <div class="product-bottom">
+                        <strong class="product-price">${parseFloat(producto.precio).toFixed(2)} €</strong>
+                        ${isAuthenticated ? `
+                            <button class="product-button" onclick="event.preventDefault(); event.stopPropagation(); addToCart('${producto.nombre}', ${producto.precio}, '${producto.foto || ''}')">
+                                Agregar al carrito
+                            </button>` : `
+                            <button class="product-button" onclick="event.preventDefault(); event.stopPropagation(); showLoginAlert()">
+                                Iniciar sesión para comprar
+                            </button>`}
+                    </div>
+                `;
+                galeria.appendChild(tarjeta);
+            });
+
+        } catch (error) {
+            console.error('Error al cargar los productos:', error);
+            galeria.innerHTML = '<p>Error al cargar productos. Intenta más tarde.</p>';
+        }
+    }
+
+    // Carga productos al iniciar
+    cargarProductos();
+
+        // Load products when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProducts();
+            
+            // Get category from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const categoria = urlParams.get('categoria');
+
+            // If there's a category parameter, set it in the filter and trigger the filter
+            if (categoria) {
+                const filtroCategoria = document.getElementById('filtro-categoria');
+                filtroCategoria.value = categoria;
+
+                // Trigger the filter
+                const filterEvent = new Event('submit');
+                document.getElementById('filtros-form').dispatchEvent(filterEvent);
+            }
         });
     </script>
+
+    <!-- Solo cargar scripts del carrito si el usuario está autenticado -->
+    @auth
     <script src="{{ asset('js/cart.js') }}"></script>
+    @endauth
+    
     <script src="{{ asset('js/tienda.js') }}"></script>
 </body>
 

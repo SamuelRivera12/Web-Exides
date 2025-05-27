@@ -3,19 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class ProductoController extends Controller
 {
-    public function mostrarProducto($id) 
+    public function mostrarProducto($id)
     {
-        $json = file_get_contents(public_path('assets/products.json'));
-        $productos = json_decode($json, true);
-        $producto = collect($productos)->firstWhere('id', (int)$id);
-        
-        if (!$producto) {
-            abort(404);
+        try {
+            $response = Http::get("http://localhost:3000/productos/{$id}");
+            
+            if (!$response->successful()) {
+                return redirect()->route('tienda')->with('error', 'Producto no encontrado');
+            }
+
+            $producto = $response->json();
+            return view('producto', compact('producto'));
+        } catch (\Exception $e) {
+            return redirect()->route('tienda')->with('error', 'Error al cargar el producto');
         }
-        
-        return view('producto', ['producto' => $producto]);
     }
 }

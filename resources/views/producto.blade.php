@@ -21,14 +21,26 @@
                 <a href="/">Inicio</a>
                 <a href="/sobrenosotros">Sobre Nosotros</a>
                 <a href="/tienda">Tienda</a>
-                <a href="/login">Iniciar Sesión</a>
+                @guest
+                    <a href="/login">Iniciar Sesión</a>
+                @else
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Cerrar Sesión
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                @endguest
             </div>
+            <!-- Reemplazar el div cart-container existente con esto -->
+            @auth
             <div class="cart-container">
                 <button id="cart-btn" style="background:none;border:none;cursor:pointer;position:relative;margin-right:35px;">
                     <i class="fas fa-shopping-cart" style="font-size:1.7rem;color:#FFDA63;"></i>
                     <span id="cart-count" style="position:absolute;top:-8px;right:-5px;background:#FFDA63;color:#181818;font-weight:bold;border-radius:50%;padding:2px 7px;font-size:0.9rem;">0</span>
                 </button>
             </div>
+            @endauth
             <div class="hamburguesa" id="hamburguesa">
                 <span></span>
                 <span></span>
@@ -45,23 +57,18 @@
             <!-- Galería de imágenes -->
             <div class="galeria-producto">
                 <div class="imagen-principal">
-                    <img src="{{ asset($producto['foto']) }}" alt="{{ $producto['nombre'] }}" id="imagenPrincipal">
-                </div>
-                <div class="miniaturas">
-                    <img src="{{ asset($producto['foto']) }}" alt="Principal" class="miniatura active" onclick="cambiarImagen(this.src)">
-                    @foreach($producto['fotos-opcionales'] ?? [] as $foto)
-                        <img src="{{ asset($foto) }}" alt="Extra" class="miniatura" onclick="cambiarImagen(this.src)">
-                    @endforeach
+                    <img src="{{ $producto['foto'] ?? asset('images/no-image.png') }}" 
+                         alt="{{ $producto['nombre'] ?? 'Imagen no disponible' }}" 
+                         id="imagenPrincipal">
                 </div>
             </div>
 
             <!-- Información del producto -->
             <div class="info-producto">
-                <!-- <h1>{{ $producto['nombre'] }}</h1> -->
-                <h3 class="marca">Por {{ $producto['marca'] }}</h3>
-                <div class="precio">{{ number_format($producto['precio'], 2) }} €</div>
+                <h3 class="marca">{{ $producto['marca'] ?? 'Marca no disponible' }}</h3>
+                <div class="precio">{{ number_format($producto['precio'] ?? 0, 2) }} €</div>
                 
-                @if($producto['unidades'] > 0)
+                @if(($producto['unidades'] ?? 0) > 0)
                     <div class="stock disponible">
                         <i class="fas fa-check"></i> En stock ({{ $producto['unidades'] }} disponibles)
                     </div>
@@ -72,9 +79,15 @@
                 @endif
 
                 <div class="acciones">
-                    <button class="btn-carrito" onclick="addToCart('{{ $producto['nombre'] }}', {{ $producto['precio'] }}, '{{ asset($producto['foto']) }}')">
-                        <i class="fas fa-shopping-cart"></i> Añadir al carrito
-                    </button>
+                    @auth
+                        <button class="btn-carrito" onclick="addToCart('{{ $producto['nombre'] }}', {{ $producto['precio'] }}, '{{ $producto['foto'] }}')">
+                            <i class="fas fa-shopping-cart"></i> Añadir al carrito
+                        </button>
+                    @else
+                        <button class="btn-carrito" onclick="showLoginAlert(); redirectToLogin();">
+                            <i class="fas fa-shopping-cart"></i> Iniciar sesión para comprar
+                        </button>
+                    @endauth
                 </div>
             </div>
 
@@ -86,30 +99,31 @@
                 </div>
 
                 <div id="descripcion" class="tab-content active">
-                    {!! nl2br(e($producto['descripcion'])) !!}
+                    {!! nl2br(e($producto['descripcion'] ?? 'Descripción no disponible')) !!}
                 </div>
 
                 <div id="caracteristicas" class="tab-content">
                     <table class="tabla-caracteristicas">
-                        @foreach($producto['caracteristicas'] ?? [] as $key => $value)
-                            <tr>
-                                <th>{{ ucfirst(str_replace('_', ' ', $key)) }}</th>
-                                <td>
-                                    @if(is_array($value))
-                                        {{ implode(', ', $value) }}
-                                    @else
-                                        {{ $value }}
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
+                        <tr>
+                            <th>Categoría</th>
+                            <td>{{ $producto['categoria'] ?? 'No especificada' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Marca</th>
+                            <td>{{ $producto['marca'] ?? 'No especificada' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Tipo</th>
+                            <td>{{ $producto['tipo'] ?? 'No especificado' }}</td>
+                        </tr>
                     </table>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Panel lateral del carrito -->
+    <!-- Reemplazar el panel lateral del carrito existente con esto -->
+    @auth
     <div id="cart-panel" class="cart-panel">
         <div class="cart-panel-content">
             <button id="close-cart" class="close-cart-btn">&times;</button>
@@ -120,6 +134,21 @@
             <button id="pagar-btn">Pagar</button>
         </div>
     </div>
+    @endauth
+
+    @guest
+    <div id="login-alert-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Iniciar Sesión Requerido</h2>
+            <p>Para agregar productos al carrito y realizar compras, necesitas iniciar sesión.</p>
+            <div class="modal-buttons">
+                <a href="{{ route('login') }}" class="btn btn-primary">Iniciar Sesión</a>
+                <a href="{{ route('register') }}" class="btn btn-secondary">Registrarse</a>
+            </div>
+        </div>
+    </div>
+    @endguest
 
     <footer class="footer">
         <div class="footer-content">
@@ -196,6 +225,10 @@
             this.classList.toggle('open');
             document.getElementById('navItems').classList.toggle('open');
         });
+
+        function redirectToLogin() {
+            window.location.href = "{{ route('login') }}";
+        }
 
         // document.addEventListener('DOMContentLoaded', function() {
         //     // Event listeners para el carrito
