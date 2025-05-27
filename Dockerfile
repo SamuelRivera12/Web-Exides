@@ -41,6 +41,8 @@ RUN composer install --no-dev --optimize-autoloader
 # Instalar frontend y compilar Vite
 RUN npm install && npm run build
 
+RUN npm install || cat /root/.npm/_logs/*-debug-0.log
+
 # Permisos
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
